@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 6</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+<form action="#" method="POST">
+  <input type="text" value="" placeholder="Campo1">
+  <input type="text" value="" placeholder="Campo2">
+  <button type="submit">Send</button>
+</form>
+
+<script type="text/javascript">
+  $(document).on('submit', 'form', function(event){
+
+    event.preventDefault();
+    console.log($(this).find('input:empty').length)
+    if($(this).find('input:empty').length)
+
+    $(this).find('input').filter(function () {
+        return $.trim($(this).val()).length > 0
+    })
+
+    console.log(total);
+
+  });
+</script>
+</body>
+</html>

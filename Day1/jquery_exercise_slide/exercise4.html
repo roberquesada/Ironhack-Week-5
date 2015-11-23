@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 4</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+</head>
+<body>
+  <button id="button-hide">Ocultar</button>
+  <button id="button-color">Cambiar color</button>
+  <div class="container">
+    <p class="a1">Append me.</p>
+    <p class="a2">Preprend me.</p>
+    <p class="a3">Before me.</p>
+    <p class="a4">After me.</p>
+
+
+    <p>Append añade al final dentro del elemento</p>
+    <p>Prepend añade al principio dentro del elemento</p>
+    <p>Before añade antes del elemento (por fuera)</p>
+    <p>After añade despues del elemento (por fuera)</p>
+  </div>
+  <script>
+
+  var arr_colors = ['red', 'green', 'white', 'purple', 'brown', 'blue', '#F3D', '#3F4']
+
+  function getRandomArbitrary(min, max) {
+    return Math.round( Math.random() * (max - min)) + min ;
+  }
+
+  $('#button-hide').on('click',function(){
+
+    if($(this).hasClass('hidden')) {
+      $(this).removeClass('hidden')
+      $(this).text('Ocultar')
+    } else {
+      $(this).addClass('hidden')
+      $(this).text('Mostrar')
+    }
+
+    $('.container').slideToggle()
+  })
+
+  $('#button-color').on('click',function(){
+    setInterval(function(){$('p').each(function(index){
+      $(this).css('color', arr_colors[getRandomArbitrary(0,7)])
+    })}, 100);
+  });
+  </script>
+</body>
+</html>

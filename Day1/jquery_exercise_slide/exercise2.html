@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 2</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+  <div class="container"></div>
+  <p class="a1">Append me.</p>
+  <p class="a2">Preprend me.</p>
+  <p class="a3">Before me.</p>
+  <p class="a4">After me.</p>
+
+  <p>Append añade al final dentro del elemento</p>
+  <p>Prepend añade al principio dentro del elemento</p>
+  <p>Before añade antes del elemento (por fuera)</p>
+  <p>After añade despues del elemento (por fuera)</p>
+  <script>
+    var a1 = $('.a1')
+    var a2 = $('.a2')
+    var a3 = $('.a3')
+    var a4 = $('.a4')
+    $('.container').append(a1).prepend(a2).before(a3).after(a4)
+
+  </script>
+</body>
+</html>

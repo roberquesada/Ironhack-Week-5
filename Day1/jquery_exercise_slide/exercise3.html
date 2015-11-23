@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 3</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script>
+  $(document).on('ready', function(){
+    var value = $('#info').val();
+    var h1 = $('<h1></h1>').text(value)
+    $('p').before(h1)
+
+    $('#info').on('input', function(){
+      h1 = $('h1').text($(this).val())
+      $('p').before(h1)
+    })
+  });
+  </script>
+</head>
+<body>
+  <input type="text" id="info" value="Hello world">
+  <p>Add the h1 on top of this paragraph.</p>
+</body>
+</html>

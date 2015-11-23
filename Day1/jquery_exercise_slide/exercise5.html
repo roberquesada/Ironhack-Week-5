@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise5</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+<button>Uno</button>
+<button>Dos</button>
+<button>Tres</button>
+<button>Cuatro</button>
+<script>
+  $('button').on('click', function(event){
+    var currentDOMElement = $(event.currentTarget)
+    currentDOMElement.toggle();
+    console.log(event.pageY + ' ' + event.pageX )
+  });
+
+</script>
+</body>
+</html>
