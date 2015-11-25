@@ -7,8 +7,8 @@ function getAjax() {
     dataType: 'JSON',
     success: function(data) {
       response.empty();
-      data.reverse().forEach(function(element) {
-        response.append(
+      data.forEach(function(element) {
+        response.prepend(
           '<ul><li>Name: ' + element.name +
           '</li><li>Occupation: ' + element.occupation +
           '</li><li>Weapon: ' + element.weapon +
