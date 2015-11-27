@@ -19,45 +19,49 @@
   function getArtist(event) {
     event.preventDefault();
     var artist = $('#artistTextField').val();
+    var artistContainer = $('.Artists');
 
     $.ajax({
       url: 'https://api.spotify.com/v1/search?type=artist&query=' + artist,
+      beforeSend: function() {
+        artistContainer.empty();
+      },
       success: function(response) {
         var artists = response.artists.items;
-        var artistContainer = $('.Artists');
-        artistContainer.empty();
         artists.forEach(function(artist) {
           artistContainer.append(
-          '<article class="col-lg-4 Artists-item" data-id="' + artist.id + '">',
-            '<h1>' + artist.name + '</h1>',
+          '<article class="col-lg-4 Artists-item" data-id="' + artist.id + '">' +
+            '<h1>' + artist.name + '</h1>' +
             '<img class="Artists-itemImage" width="300" height="300" src="' +
-            artist.images[0].url + '"/>',
+            artist.images[0].url + '"/>' +
             '</article>');
         });
       }
     });
   }
-  //
+
   function getArtistAlbums() {
     var id = $(this).data('id');
-    modal.append('<div id="ArtistAlbums"><h1>Albums</h1></div>');
     $.ajax({
       url: 'https://api.spotify.com/v1/artists/' + id + '/albums',
       beforeSend: function() {
         modal.empty();
-        $('.modal').modal('show');
-        getRelatedArtists(id);
+        modal.append('<div id="ArtistAlbums" class="row"><h1>Albums</h1></div>');
       },
       success: function(data) {
         var albums = data.items;
 
         albums.forEach(function(album) {
-          $(document).find('#ArtistAlbums').prepend(
+          $(document).find('#ArtistAlbums').append(
           '<article class="col-lg-4 Album-item" data-id="' + album.id + '">' +
             '<h4>' + album.name + '</h4>' +
             '<img class="Album-itemImage" width="150" height="150" src="' +
             album.images[0].url + '"/>' + '</article>');
         });
+      },
+      complete: function() {
+        $('.modal').modal('show');
+        getRelatedArtists(id);
       }
     });
   }
@@ -75,18 +79,18 @@
         var tracks = data.items;
         tracks.forEach(function(track) {
           modal.append(
-          '<article class="col-sm-12">',
-            '<div class="Track-item">',
-              '<div class="Track-itemNumber">',
-                track.track_number,
-              '</div>',
-              '<div class="Track-itemName">',
-                track.name,
-              '</div>',
-              '<div class="Track-itemTime">',
-                msToTime(track.duration_ms),
-              '</div>',
-            '</div>',
+          '<article class="col-sm-12">' +
+            '<div class="Track-item">' +
+              '<div class="Track-itemNumber">' +
+                track.track_number +
+              '</div>' +
+              '<div class="Track-itemName">' +
+                track.name +
+              '</div>' +
+              '<div class="Track-itemTime">' +
+                msToTime(track.duration_ms) +
+              '</div>' +
+            '</div>' +
           '</article>');
         });
       }
@@ -94,10 +98,12 @@
   }
 
   function getRelatedArtists(id) {
-    modal.append('<div id="related"><h1>Artist related</h1></div>');
     var relatedArtists = $.ajax({
       url: 'https://api.spotify.com/v1/artists/' + id + '/related-artists',
       method: 'GET',
+      beforeSend: function() {
+        modal.prepend('<div id="related" class="row"><h1>Artist related</h1></div>');
+      },
       success: function(data) {
         data.artists.forEach(function(artist) {
           $(document).find('#related').append(
